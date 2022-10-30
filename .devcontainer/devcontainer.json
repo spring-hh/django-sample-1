@@ -1,0 +1,6 @@
+{
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
+  "service": "web",
+  "workspaceFolder": "/code",
+  "extensions": ["ms-python.python", "GitHub.copilot"]
+}
