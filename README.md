@@ -25,6 +25,17 @@ https://maku77.github.io/python/env/dotenv.html
 black --check .
 black .
 ```
+
+# celery　の導入
+https://zats-firm.com/2022/02/05/django_cerery_redis%e3%81%ab%e3%82%88%e3%82%8b%e9%9d%9e%e5%90%8c%e6%9c%9f%e5%87%a6%e7%90%86%e3%81%ae%e5%ae%9f%e8%a3%85/
+```bash
+pip install celery django-celery-results django-redis
+```
+```bash
+celery -A config worker -l info
+
+```
+
 # Start
 
 - clone

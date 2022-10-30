@@ -1,6 +1,11 @@
 version: "3"
 
 services:
+  redis:
+    image: redis
+    volumes:
+      - ./redis/data:/data
+    restart: always
   db:
     image: postgres
     volumes:
