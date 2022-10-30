@@ -17,6 +17,9 @@ https://zenn.dev/saboyutaka/articles/9cffc8d14c6684
 
 http://127.0.0.1:8000/
 
+# envファイルの作成時の参考
+https://maku77.github.io/python/env/dotenv.html
+
 # Start
 
 - clone
