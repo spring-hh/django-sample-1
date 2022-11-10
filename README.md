@@ -41,4 +41,5 @@ celery -A config worker -l info
 - clone
 - dev container を開く
 - python manage.py migrate
-- python manage.py runserver
+- celery -A config worker -l info
+- python3 manage.py runserver 0.0.0.0:8000
