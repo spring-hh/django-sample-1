@@ -1,6 +1,6 @@
 from operator import le
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django_celery_results.models import TaskResult
 from django.template import loader
 from .tasks import insert
@@ -16,4 +16,8 @@ def asyncapp(requests):
     )
 
     context = {"task_results": task_results}
-    return HttpResponse(template.render(context, requests))
+
+    if requests.method == "POST":
+        return HttpResponseRedirect("/asyncapp")
+    else:
+        return render(requests, "async.html", context)
