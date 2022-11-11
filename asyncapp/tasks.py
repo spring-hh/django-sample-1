@@ -13,7 +13,12 @@ def insert(word):
     print(task_id)
 
     # insert into database
-    Result.objects.create(task_id=task_id, result=word, status='PENDING', date_start=datetime.datetime.now())
+    Result.objects.create(
+        task_id=task_id,
+        result=word,
+        status="PENDING",
+        date_start=datetime.datetime.now(),
+    )
 
     time.sleep(20)
     return word
