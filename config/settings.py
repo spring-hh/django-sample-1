@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # top app
+    "top",
     # 非同期処理
     "asyncapp",
     "django_celery_results",
