@@ -20,4 +20,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("top.urls")),
     path("asyncapp/", include("asyncapp.urls")),
+    path("dragdrop/", include("dragdrop.urls")),
 ]

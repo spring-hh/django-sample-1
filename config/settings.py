@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     # 非同期処理
     "asyncapp",
     "django_celery_results",
+    # drag and drop
+    "dragdrop",
 ]
 
 MIDDLEWARE = [
