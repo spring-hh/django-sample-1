@@ -21,4 +21,5 @@ urlpatterns = [
     path("", include("top.urls")),
     path("asyncapp/", include("asyncapp.urls")),
     path("dragdrop/", include("dragdrop.urls")),
+    path("todo/", include("todo.urls")),
 ]

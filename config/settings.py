@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "django_celery_results",
     # drag and drop
     "dragdrop",
+    # to do
+    "todo",
 ]
 
 MIDDLEWARE = [
