@@ -1,54 +1,101 @@
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div id="app">
-        <h1>ToDoリスト</h1>
-        <input type="text" v-model="newTodo" @keyup.enter="addTodo">
-        <ul>
-            <li v-for="(todo, index) in todos" :key="index">
-                <input type="checkbox" v-model="todo.done">
-                <span v-if="!todo.edit">{{ todo.title }}</span>
-                <input type="text" v-model="todo.title" v-if="todo.edit">
-                <button @click="editTodo(todo)">編集</button>
-                <button @click="deleteTodo">削除</button>
-            </li>
-        </ul>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                newTodo: '',
-                todos: []
-            },
-            methods: {
-                addTodo: function() {
-                    if (this.newTodo == '') {
-                        return;
-                    }
-                    this.todos.push({
-                        title: this.newTodo,
-                        done: false,
-                        edit: false
-                    });
-                    this.newTodo = '';
-                },
-                editTodo: function(todo) {
-                    todo.edit = !todo.edit;
-                },
-                deleteTodo: function() {
-                    this.todos = this.todos.filter(function(todo) {
-                        return !todo.done;
-                    });
-                }
-            }
-        });
+  <head>
+    <meta charset="utf-8" />
+    <title>ドラッグ＆ドロップで要素の持つテキストをコピー</title>
+    <script type="text/javascript">
+      // ドラッグ時のハンドラ
+      function dragHandler(event) {
+        // ドラッグ元のテキストをDataTransferオブジェクトに保持
+        var orgText = event.target.innerHTML;
+        console.log("dragHandler: " + orgText);
+        const json = {
+          id: 1,
+          name: orgText,
+        };
+        event.dataTransfer.setData("text/plain", JSON.stringify(json));
+      }
+
+      // ドロップ時のハンドラ
+      function dropHandler(event) {
+        // デフォルト処理のキャンセル
+        event.preventDefault();
+
+        // DataTransferオブジェクトからテキストを取得してドラッグ先のテキストに代入
+        // var orgText = event.dataTransfer.getData("text");
+        // event.target.innerHTML = orgText;
+
+        // 元のinnerHTMLを削除
+        event.target.innerHTML = "";
+        
+        // jsonを取得
+        var orgText = event.dataTransfer.getData("text/plain");
+        const json = JSON.parse(orgText);
+        console.log(json)
+        event.target.innerHTML = json.name;
+      }
     </script>
-</body>
+    <!-- use vuejs -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- use bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <!-- margin 10px -->
+      <div class="m-10">
+        <div class="row">
+          <!-- drag 1 -->
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">ドラッグ元</div>
+              <div class="card-body">
+                <div
+                  class="card"
+                  draggable="true"
+                  ondragstart="dragHandler(event)"
+                >
+                  <div class="card-body">ドラッグ元のテキスト</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- drop to 1 -->
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">ドロップ先</div>
+              <div class="card-body">
+                <div
+                  class="card"
+                  ondrop="dropHandler(event)"
+                  ondragover="event.preventDefault()"
+                >
+                  <div class="card-body">ドロップ先のテキスト</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- drop to 2 -->
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">ドロップ先</div>
+              <div class="card-body">
+                <div
+                  class="card"
+                  ondrop="dropHandler(event)"
+                  ondragover="event.preventDefault()"
+                >
+                  <div class="card-body">ドロップ先のテキスト</div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </body>
 </html>
