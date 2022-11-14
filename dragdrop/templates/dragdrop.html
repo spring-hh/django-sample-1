@@ -6,7 +6,10 @@
       // ドラッグ時のハンドラ
       function dragHandler(event) {
         // ドラッグ元のテキストをDataTransferオブジェクトに保持
-        var orgText = event.target.innerHTML;
+        {% comment %} var orgText = event.target.innerHTML; {% endcomment %}
+        var orgText = event.target.innerText;
+        // innerText
+        console.log(event)
         console.log("dragHandler: " + orgText);
         const json = {
           id: 1,
@@ -25,13 +28,15 @@
         // event.target.innerHTML = orgText;
 
         // 元のinnerHTMLを削除
-        event.target.innerHTML = "";
+        event.target.innerText = "";
+        {% comment %} event.target.innerHTML = ""; {% endcomment %}
         
         // jsonを取得
         var orgText = event.dataTransfer.getData("text/plain");
         const json = JSON.parse(orgText);
         console.log(json)
-        event.target.innerHTML = json.name;
+        event.target.innerText = json.name;
+        {% comment %} event.target.innerHTML = json.name; {% endcomment %}
       }
     </script>
     <!-- use vuejs -->
