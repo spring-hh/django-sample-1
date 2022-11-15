@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     "dragdrop",
     # to do
     "todo",
+    # common
+    "common",
 ]
 
 MIDDLEWARE = [
