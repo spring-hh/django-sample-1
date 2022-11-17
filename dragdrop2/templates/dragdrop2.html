@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="app">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+            <div class="card-header">ドラッグ元</div>
+            <div class="card-body">
+                <div class="card" draggable="true" @dragstart="dragHandler($event, item)" v-for="item in items">
+                <div class="card-body">[[item.id]]</div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+            <div class="card-header">ドロップ先</div>
+            <div class="card-body">
+                <div class="card mt-3" @drop="dropHandler($event, droppedIem.id)" @dragover.prevent @dragenter.prevent v-for="droppedIem in droppedItems">
+                <div class="card-body">[[droppedIem.name]]</div>
+                <div class="card-body">[[droppedIem.target]]</div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!',
+            items: [
+                {
+                    id: 1,
+                    name: 'ドラッグ元のテキスト1'
+                },
+                {
+                    id: 2,
+                    name: 'ドラッグ元のテキスト2'
+                },
+                {
+                    id: 3,
+                    name: 'ドラッグ元のテキスト3'
+                },
+            ],
+            droppedItems: [
+                {
+                    id: 1,
+                    name: 'ドロップ先のテキスト1',
+                    target: ''
+                },
+                {
+                    id: 2,
+                    name: 'ドロップ先のテキスト2',
+                    target: ''
+                }
+            ],
+        },
+        methods: {
+            dragHandler: function(event, item) {
+                event.dataTransfer.setData('text/plain', JSON.stringify(item));
+            },
+            dropHandler: function(event, id) {
+                const item = event.dataTransfer.getData('text/plain');
+                const json = JSON.parse(item);
+
+                this.droppedItems.forEach(function(value, index) {
+                    if (value.id === id) {
+                        value.target = json.name;
+                        Vue.set(this.droppedItems, index, value);
+                    }
+                }, this);
+            },
+        }
+    })
+</script>
+{% endblock %}

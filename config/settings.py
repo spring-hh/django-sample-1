@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "django_celery_results",
     # drag and drop
     "dragdrop",
+    # drag and drop2
+    "dragdrop2",
     # to do
     "todo",
     # common
