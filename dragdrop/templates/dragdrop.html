@@ -1,54 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="app">
-  <!-- margin 10px -->
-  <div class="m-10">
-    <div class="row">
-      <!-- drag 1 -->
-      <div class="col-6">
-        <div class="card">
-          <div class="card-header">ドラッグ元</div>
-          <div class="card-body">
-            <div class="card" draggable="true" ondragstart="dragHandler(event)">
-              <div class="card-body">ドラッグ元のテキスト</div>
+    <div id="app">
+        <!-- margin 10px -->
+        <div class="m-10">
+            <div class="row">
+                <!-- drag 1 -->
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">ドラッグ元</div>
+                        <div class="card-body">
+                            <div class="card" draggable="true" ondragstart="dragHandler(event)">
+                                <div class="card-body">ドラッグ元のテキスト</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- drop to 1 -->
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">ドロップ先</div>
+                        <div class="card-body">
+                            <div class="card"
+                                 ondrop="dropHandler(event)"
+                                 ondragover="event.preventDefault()">
+                                <div class="card-body">ドロップ先のテキスト</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- drop to 2 -->
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">ドロップ先</div>
+                        <div class="card-body">
+                            <div class="card"
+                                 ondrop="dropHandler(event)"
+                                 ondragover="event.preventDefault()">
+                                <div class="card-body">ドロップ先のテキスト</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- drop to 1 -->
-      <div class="col-6">
-        <div class="card">
-          <div class="card-header">ドロップ先</div>
-          <div class="card-body">
-            <div
-              class="card"
-              ondrop="dropHandler(event)"
-              ondragover="event.preventDefault()"
-            >
-              <div class="card-body">ドロップ先のテキスト</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- drop to 2 -->
-      <div class="col-6">
-        <div class="card">
-          <div class="card-header">ドロップ先</div>
-          <div class="card-body">
-            <div
-              class="card"
-              ondrop="dropHandler(event)"
-              ondragover="event.preventDefault()"
-            >
-              <div class="card-body">ドロップ先のテキスト</div>
-            </div>
-          </div>
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
+            <script type="text/javascript">
   // ドラッグ時のハンドラ
   function dragHandler(event) {
     // ドラッグ元のテキストをDataTransferオブジェクトに保持
@@ -84,5 +78,5 @@
     event.target.innerText = json.name;
     {% comment %} event.target.innerHTML = json.name; {% endcomment %}
   }
-</script>
-{% endblock %}
+            </script>
+        {% endblock %}

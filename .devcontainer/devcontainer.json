@@ -6,6 +6,7 @@
     "ms-python.python",
     "GitHub.copilot",
     "batisteo.vscode-django",
-    "cweijan.vscode-postgresql-client2"
+    "cweijan.vscode-postgresql-client2",
+    "hookyqr.beautify"
   ]
 }
