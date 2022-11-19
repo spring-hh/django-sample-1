@@ -2,12 +2,12 @@
 {% block content %}
     <div id="app">
         <h1>ToDoリスト</h1>
-        <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+        <input type="text" v-model="newTodo" @keyup.enter="addTodo" />
         <ul>
             <li v-for="(todo, index) in todos" :key="index">
-                <input type="checkbox" v-model="todo.done">
+                <input type="checkbox" v-model="todo.done" />
                 <span v-if="!todo.edit">{{ todo.title }}</span>
-                <input type="text" v-model="todo.title" v-if="todo.edit">
+                <input type="text" v-model="todo.title" v-if="todo.edit" />
                 <button @click="editTodo(todo)">編集</button>
                 <button @click="deleteTodo">削除</button>
             </li>
@@ -22,7 +22,7 @@
             todos: []
         },
         methods: {
-            addTodo: function() {
+            addTodo: function () {
                 if (this.newTodo == '') {
                     return;
                 }
@@ -33,11 +33,11 @@
                 });
                 this.newTodo = '';
             },
-            editTodo: function(todo) {
+            editTodo: function (todo) {
                 todo.edit = !todo.edit;
             },
-            deleteTodo: function() {
-                this.todos = this.todos.filter(function(todo) {
+            deleteTodo: function () {
+                this.todos = this.todos.filter(function (todo) {
                     return !todo.done;
                 });
             }

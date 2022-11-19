@@ -151,3 +151,5 @@ REDIS_DB = os.getenv("REDIS_DB")
 # Settings for celery
 CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
 CELERY_RESULT_BACKEND = "django-db"
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

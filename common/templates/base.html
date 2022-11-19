@@ -1,6 +1,12 @@
 {% load static %}
 <html lang="ja">
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content="" />
+        <!-- meta keywords -->
+        <meta name="keywords" content="" />
         <title>
             {% block title %}top{% endblock %}
         </title>
@@ -8,10 +14,14 @@
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-              crossorigin="anonymous">
+              crossorigin="anonymous"/>
         <!-- use vuejs -->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
+        <!-- use axios -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <!-- use custom css -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     </head>
     <body>
         {% comment %} menu {% endcomment %}
