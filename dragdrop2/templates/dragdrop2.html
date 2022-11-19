@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="app">
+    {% comment %} save button {% endcomment %}
+    <button v-on:click="save">Save</button>
     <div class="row">
         <div class="col-6">
             <div class="card">
@@ -26,6 +28,7 @@
     </div>
 </div>
 <script>
+    const URL = '{% url "drapdrop2" %}';
     new Vue({
         delimiters: ['[[', ']]'],
         el: '#app',
@@ -49,12 +52,14 @@
                 {
                     id: 1,
                     name: 'ドロップ先のテキスト1',
-                    target: ''
+                    target: '',
+                    editFlg: false,
                 },
                 {
                     id: 2,
                     name: 'ドロップ先のテキスト2',
-                    target: ''
+                    target: '',
+                    editFlg: false,
                 }
             ],
         },
@@ -69,10 +74,26 @@
                 this.droppedItems.forEach(function(value, index) {
                     if (value.id === id) {
                         value.target = json.name;
+                        value.editFlg = true;
                         Vue.set(this.droppedItems, index, value);
                     }
                 }, this);
             },
+            save: function() {
+                const saveItems = this.droppedItems.filter(item => item.editFlg === true)
+                if (saveItems.length === 0) {
+                    return;
+                }
+                const csrftoken = Cookies.get('csrftoken');
+                fetch(URL, {
+                    method: 'post',
+                    headers: {
+                        'Content-Type':  'application/json',
+                        'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify(saveItems)
+                })
+            }
         }
     })
 </script>
