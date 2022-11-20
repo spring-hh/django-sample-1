@@ -5,6 +5,6 @@ services:
     command: sleep infinity
     volumes:
       - .:/code
-      - ./bashrc:/root/.bashrc
+      - ./.bashrc:/root/.bashrc
     ports:
       - "8000:8000"
