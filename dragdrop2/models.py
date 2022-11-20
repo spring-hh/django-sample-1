@@ -4,3 +4,4 @@ from django.db import models
 class Convert(models.Model):
     name = models.CharField(max_length=100)
     target = models.CharField(max_length=100)
+    editFlg = models.BooleanField(default=False)

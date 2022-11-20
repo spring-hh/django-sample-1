@@ -1,40 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div id="app">
-        {% comment %} save button {% endcomment %}
-        <button v-on:click="save">Save</button>
-        <div class="row">
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-header">ドラッグ元</div>
-                    <div class="card-body">
-                        <div class="card"
-                             draggable="true"
-                             @dragstart="dragHandler($event, item)"
-                             v-for="item in items">
-                            <div class="card-body">[[item.id]]</div>
-                        </div>
+<div id="app">
+    {% comment %} save button {% endcomment %}
+    <button v-on:click="save">Save</button>
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">ドラッグ元</div>
+                <div class="card-body">
+                    <div class="card" draggable="true" @dragstart="dragHandler($event, item)" v-for="item in items">
+                        <div class="card-body">[[item.id]]</div>
                     </div>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-header">ドロップ先</div>
-                    <div class="card-body">
-                        <div class="card mt-3"
-                             @drop="dropHandler($event, droppedIem.id)"
-                             @dragover.prevent
-                             @dragenter.prevent
-                             v-for="droppedIem in droppedItems">
-                            <div class="card-body">[[droppedIem.name]]</div>
-                            <div class="card-body">[[droppedIem.target]]</div>
-                        </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">ドロップ先</div>
+                <div class="card-body">
+                    <div class="card mt-3" @drop="dropHandler($event, droppedIem.id)" @dragover.prevent
+                        @dragenter.prevent v-for="droppedIem in droppedItems">
+                        <div class="card-body">[[droppedIem.name]]</div>
+                        <div class="card-body">[[droppedIem.target]]</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
+</div>
+<script>
     const URL = '{% url "drapdrop2" %}';
     new Vue({
         delimiters: ['[[', ']]'],
@@ -54,21 +48,28 @@
                     name: 'ドラッグ元のテキスト3'
                 },
             ],
-            droppedItems: [{
-                    id: 1,
-                    name: 'ドロップ先のテキスト1',
-                    target: '',
-                    editFlg: false,
-                },
-                {
-                    id: 2,
-                    name: 'ドロップ先のテキスト2',
-                    target: '',
-                    editFlg: false,
-                }
-            ],
+            droppedItems: [],
+        },
+        created: function () {
+            this.get();
         },
         methods: {
+            get: function () {
+                fetch(URL, {
+                        method: 'get',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(json_list => {
+                        json_list.map((json) => {
+                            this.droppedItems.push(json);
+                        })
+                    })
+            },
             dragHandler: function (event, item) {
                 event.dataTransfer.setData('text/plain', JSON.stringify(item));
             },
@@ -91,15 +92,23 @@
                 }
                 const csrftoken = Cookies.get('csrftoken');
                 fetch(URL, {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': csrftoken,
-                    },
-                    body: JSON.stringify(saveItems)
-                })
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                        },
+                        body: JSON.stringify(saveItems)
+                    })
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(json_list => {
+                        json_list.map((json) => {
+                            this.droppedItems.push(json);
+                        })
+                    })
             }
         }
     })
-    </script>
+</script>
 {% endblock %}
