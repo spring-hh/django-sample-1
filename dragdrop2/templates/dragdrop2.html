@@ -1,34 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="app">
-    {% comment %} save button {% endcomment %}
-    <button v-on:click="save">Save</button>
-    <div class="row">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header">ドラッグ元</div>
-                <div class="card-body">
-                    <div class="card" draggable="true" @dragstart="dragHandler($event, item)" v-for="item in items">
-                        <div class="card-body">[[item.id]]</div>
+    <div id="app">
+        {% comment %} save button {% endcomment %}
+        <button v-on:click="save">Save</button>
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">ドラッグ元</div>
+                    <div class="card-body">
+                        <div class="card"
+                             draggable="true"
+                             @dragstart="dragHandler($event, item)"
+                             v-for="item in items">
+                            <div class="card-body">[[item.id]]</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header">ドロップ先</div>
-                <div class="card-body">
-                    <div class="card mt-3" @drop="dropHandler($event, droppedIem.id)" @dragover.prevent
-                        @dragenter.prevent v-for="droppedIem in droppedItems">
-                        <div class="card-body">[[droppedIem.name]]</div>
-                        <div class="card-body">[[droppedIem.target]]</div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">ドロップ先</div>
+                    <div class="card-body">
+                        <div class="card mt-3"
+                             @drop="dropHandler($event, droppedIem.id)"
+                             @dragover.prevent
+                             @dragenter.prevent
+                             v-for="droppedIem in droppedItems">
+                            <div class="card-body">[[droppedIem.name]]</div>
+                            <div class="card-body">[[droppedIem.target]]</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
+    <script>
     const URL = '{% url "drapdrop2" %}';
     new Vue({
         delimiters: ['[[', ']]'],
@@ -110,5 +116,5 @@
             }
         }
     })
-</script>
+    </script>
 {% endblock %}

@@ -48,14 +48,6 @@
     // ドラッグ時のハンドラ
     function dragHandler(event) {
         // ドラッグ元のテキストをDataTransferオブジェクトに保持
-        {
-            %
-            comment %
-        }
-        var orgText = event.target.innerHTML; {
-            %
-            endcomment %
-        }
         var orgText = event.target.innerText;
         // innerText
         console.log(event)
@@ -72,32 +64,14 @@
         // デフォルト処理のキャンセル
         event.preventDefault();
 
-        // DataTransferオブジェクトからテキストを取得してドラッグ先のテキストに代入
-        // var orgText = event.dataTransfer.getData("text");
-        // event.target.innerHTML = orgText;
-
         // 元のinnerHTMLを削除
-        event.target.innerText = ""; {
-            %
-            comment %
-        }
-        event.target.innerHTML = ""; {
-            %
-            endcomment %
-        }
+        event.target.innerText = "";
 
-        // jsonを取得
+        // DataTransferオブジェクトからテキストを取得してドラッグ先のテキストに代入
         var orgText = event.dataTransfer.getData("text/plain");
         const json = JSON.parse(orgText);
         console.log(json)
-        event.target.innerText = json.name; {
-            %
-            comment %
-        }
-        event.target.innerHTML = json.name; {
-            %
-            endcomment %
-        }
+        event.target.innerText = json.name;
     }
     </script>
 {% endblock %}
